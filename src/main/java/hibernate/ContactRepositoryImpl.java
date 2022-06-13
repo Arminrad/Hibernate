@@ -9,12 +9,13 @@ public class ContactRepositoryImpl implements ContactRepository {
     private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
     @Override
-    public void save(Contact contact) {
+    public Contact save(Contact contact) {
         try (var session = sessionFactory.openSession()) {
             var transaction = session.beginTransaction();
             try {
                 session.save(contact);
                 transaction.commit();
+                return contact;
             } catch (Exception e) {
                 transaction.rollback();
                 throw e;
