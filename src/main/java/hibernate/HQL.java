@@ -44,5 +44,22 @@ public class HQL {
         query.setParameter("firstName", "siavosh");
         query.setParameter("phoneNumber", "09304714334");
         query.getResultStream().forEach(System.out::println);*/
+
+/*        // Native query
+        var sql = " SELECT * FROM contact c WHERE c.firstName = :firstName";
+        var query = session.createNativeQuery(sql, Contact.class);
+        query.setParameter("firstName", "siavosh");
+        query.getResultStream().forEach(System.out::println);*/
+
+        // NamedQuery
+        var query = session.createNamedQuery("findAll", Contact.class);
+        query.getResultStream().forEach(System.out::println);
+
+
+
+
+
+
     }
+
 }
